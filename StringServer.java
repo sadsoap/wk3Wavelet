@@ -5,7 +5,7 @@ class Handler implements URLHandler {
     // Values that will be changed based on input:
   
     // String value that will hold the text being displayed.
-    String sCurrent = "[Intentionally blank for testing]"; //Delete this before submission
+    String sCurrent = ""; 
     
     // Number that increments with each string added.
     int iNum = 0;
@@ -13,6 +13,9 @@ class Handler implements URLHandler {
     public String handleRequest(URI url) {
         if (url.getPath().equals("/")) {
           // Default; What user sees at index.
+          if (sCurrent.equals("")){
+            return "No messages have been added.";
+          }else
             return sCurrent;
           
         } else {
@@ -20,7 +23,7 @@ class Handler implements URLHandler {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("s")) {
                     iNum++;
-                    sCurrent += ( "\n" + iNum + parameters[1] );
+                    sCurrent = ( sCurrent + "\n" + iNum + ". " + parameters[1] );
                     return sCurrent;
                   
                 }
